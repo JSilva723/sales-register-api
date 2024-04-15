@@ -8,7 +8,7 @@ export class PaymentController {
     constructor() { }
 
     public getAll = async (req: Request, res: Response) => {
-        const all = await prisma.category.findMany({
+        const all = await prisma.payment.findMany({
             where: { isActive: true },
             select: { id: true, name: true }
         })
@@ -19,32 +19,32 @@ export class PaymentController {
     public create = async (req: Request, res: Response) => {
         const [error, createDto] = CreatePaymentDto.create(req.body)
         if (error) return res.status(400).json({ error })
-        const category = await prisma.category.create({
+        const payment = await prisma.payment.create({
             data: createDto!,
             select: { id: true, name: true }
         })
 
-        return res.status(201).json(category)
+        return res.status(201).json(payment)
     }
 
     public update = async (req: Request, res: Response) => {
         const id = +req.params.id
         const [error, updateDTO] = UpdatePaymentDto.update({ id, ...req.body })
         if (error) return res.status(400).json({ error })
-        const category = await prisma.category.update({
+        const payment = await prisma.payment.update({
             where: { id },
             data: updateDTO!.values,
             select: { id: true, name: true }
         })
 
-        return res.json(category)
+        return res.json(payment)
     }
 
     public delete = async (req: Request, res: Response) => {
         const id = +req.params.id
         const [error] = UpdatePaymentDto.update({ id })
         if (error) return res.status(400).json({ error })
-        await prisma.category.update({
+        await prisma.payment.update({
             where: { id, isActive: true },
             data: { isActive: false }
         })
