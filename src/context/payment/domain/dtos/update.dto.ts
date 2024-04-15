@@ -1,7 +1,7 @@
 export class UpdatePaymentDto {
     constructor(
         public readonly id: number,
-        public readonly name: string,
+        public readonly name?: string,
     ) { }
 
     get values() {
@@ -11,7 +11,7 @@ export class UpdatePaymentDto {
         return obj
     }
 
-    static update(props: { id: number, name: string }): [string?, UpdatePaymentDto?] {
+    static update(props: { id: number, name?: string }): [string?, UpdatePaymentDto?] {
         const { id, name } = props
         if (!id || isNaN(Number(id))) {
             return ['The ID must be a number', undefined]
