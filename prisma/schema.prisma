@@ -8,11 +8,13 @@ datasource db {
 }
 
 model Category {
-    id   Int    @id @default(autoincrement())
-    name String
+    id       Int     @id @default(autoincrement())
+    name     String  @unique @db.VarChar(20)
+    isActive Boolean @default(true)
 }
 
 model Payment {
-    id   Int    @id @default(autoincrement())
-    name String
+    id       Int     @id @default(autoincrement())
+    name     String  @unique @db.VarChar(20)
+    isActive Boolean @default(true)
 }

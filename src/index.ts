@@ -1,9 +1,25 @@
-import 'dotenv/config'
-import { server } from './server'
+import { envs } from './config/envs'
+import { prisma } from './config/postgres-db-client'
+import { Server } from './server'
+import { AppRoutes } from './routes'
 
-const PORT = process.env.PORT || 3008
+async function main() {
+    const server = new Server({
+        port: envs.PORT,
+        routes: AppRoutes.routes
+    })
 
-server().listen(PORT, () => {
-    //eslint-disable-next-line no-console
-    console.log('Listen on port: ' + PORT)
-})
+    server.start()
+}
+
+(() => {
+    main()
+        .then(async () => {
+            await prisma.$disconnect()
+        })
+        .catch(async (e) => {
+            console.error(e) // eslint-disable-line no-console
+            await prisma.$disconnect()
+            process.exit(1)
+        })
+})()
