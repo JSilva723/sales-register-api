@@ -29,7 +29,7 @@ export class CategoryController {
 
     public update = async (req: Request, res: Response) => {
         const id = +req.params.id
-        const [error, updateDTO] = UpdateCategoryDto.update({ id })
+        const [error, updateDTO] = UpdateCategoryDto.update({ id, ...req.body })
         if (error) return res.status(400).json({ error })
         const category = await prisma.category.update({
             where: { id },
