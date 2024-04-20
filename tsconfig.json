@@ -7,8 +7,6 @@
         "strict": true,
         "noImplicitAny": true,
         "resolveJsonModule": true,
-        "baseUrl": ".",
-        "paths": {}
     },
     "exclude": [
         "node_modules",

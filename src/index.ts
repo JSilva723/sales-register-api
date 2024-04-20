@@ -1,7 +1,7 @@
 import { envs } from './config/envs'
 import { prisma } from './config/postgres-db-client'
-import { Server } from './server'
-import { AppRoutes } from './routes'
+import { Server } from './presentation/server'
+import { AppRoutes } from './presentation/routes'
 
 async function main() {
     const server = new Server({

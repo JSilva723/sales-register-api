@@ -1,6 +1,7 @@
 import { Router } from 'express'
-import { CategoryRoutes } from './context/category/routes'
-import { PaymentRoutes } from './context/payment/routes'
+import { PaymentRoutes } from '../context/payment/routes'
+import { CategoryRoutes } from '../context/category/adapter/framework/routes'
+import { errorHandler } from './error-handler'
 
 export class AppRoutes {
     static get routes(): Router {
@@ -10,6 +11,7 @@ export class AppRoutes {
         })
         router.use('/category', CategoryRoutes.routes)
         router.use('/payment', PaymentRoutes.routes)
+        router.use(errorHandler)
 
         return router
     }
