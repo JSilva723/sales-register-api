@@ -9,7 +9,7 @@
         "build:dev": "NODE_ENV=development webpack",
         "start": "npm run build:prod && node ./dist/server.js",
         "dev": "npm run build:dev && nodemon ./dist/server.js & NODE_ENV=development webpack --watch",
-        "test": "jest",
+        "test": "jest --silent",
         "lint": "eslint ./src ./tests",
         "lint:fix": "npm run lint -- --fix",
         "prepare": "husky"

@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express'
 import { PrismaError } from '@config/postgres-db-client'
 import { HttpError } from '@shared/errors'
 
-interface HandleError extends PrismaError, HttpError { }
+export interface HandleError extends PrismaError, HttpError { }
 
 //eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const errorHandler = (err: HandleError, _req: Request, res: Response, _next: NextFunction) => {

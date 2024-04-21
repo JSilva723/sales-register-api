@@ -1,10 +1,5 @@
-export interface HttpError {
-    statusCode: number
-    message: string
-}
-
-abstract class CustomError extends Error implements HttpError {
-    abstract statusCode: number;
+export abstract class HttpError extends Error {
+    abstract statusCode: number
 
     constructor(message: string) {
         super(message)
@@ -12,7 +7,7 @@ abstract class CustomError extends Error implements HttpError {
     }
 }
 
-export class NotFoundError extends CustomError {
+export class NotFoundError extends HttpError {
     statusCode = 404
     constructor(message: string) {
         super(message)
@@ -24,7 +19,7 @@ export class NotFoundError extends CustomError {
     }
 }
 
-export class BadRequestError extends CustomError {
+export class BadRequestError extends HttpError {
     statusCode = 400
     constructor(message: string) {
         super(message)
