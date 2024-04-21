@@ -7,12 +7,28 @@
         "strict": true,
         "noImplicitAny": true,
         "resolveJsonModule": true,
+        "baseUrl": ".",
+        "paths": {
+            "@presentation/*": [
+                "./src/presentation/*"
+            ],            
+            "@context/*": [
+                "./src/context/*"
+            ],
+            "@config/*": [
+                "./src/config/*"
+            ],
+            "@shared/*": [
+                "./src/shared/*"
+            ],
+        }
     },
     "exclude": [
         "node_modules",
-        "dist"
+        "dist",
     ],
     "include": [
-        "src"
+        "src",
+        "tests"
     ]
 }

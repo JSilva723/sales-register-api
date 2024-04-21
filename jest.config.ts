@@ -4,14 +4,15 @@ import { compilerOptions } from './tsconfig.json'
 
 const jestConfig: JestConfigWithTsJest = {
     roots: ['<rootDir>'],
+    transform: {
+        '^.+\\.tsx?$': 'ts-jest',
+    },
     modulePaths: [compilerOptions.baseUrl],
     moduleNameMapper: {
         ...pathsToModuleNameMapper(compilerOptions.paths, { prefix: '<rootDir>/' })
     },
-    transform: {
-        '^.+\\.tsx?$': 'ts-jest',
-    },
-    testEnvironment: 'node'
+    preset: 'ts-jest',
+    testEnvironment: 'jest-environment-node',
 }
 
 export default jestConfig
