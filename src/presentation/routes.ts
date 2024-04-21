@@ -1,6 +1,6 @@
 import { Router } from 'express'
-import { PaymentRoutes } from '../context/payment/routes'
-import { CategoryRoutes } from '../context/category/adapter/framework/routes'
+import { CategoryRoutes } from '@context/category/adapter/framework/routes'
+import { PaymentRoutes } from '@context/payment/routes'
 import { errorHandler } from './error-handler'
 
 export class AppRoutes {

@@ -1,3 +1,4 @@
+import { BadRequestError } from '@shared/errors'
 import { Repository } from '../../domain/repository'
 
 export class Delete {
@@ -5,9 +6,9 @@ export class Delete {
 
     execute(id: number): Promise<void> {
         if (!id || isNaN(Number(id))) {
-            throw 'The ID must be number'
+            throw BadRequestError.drop('The ID must be number')
         }
-        
+
         return this.repository.delete(id)
     }
 }

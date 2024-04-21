@@ -8,11 +8,19 @@ export class NotFoundError extends Error {
     constructor(message: string) {
         super(message)
     }
+
+    public static drop(message: string) {
+        return new NotFoundError(message)
+    }
 }
 
 export class BadRequestError extends Error {
     private readonly statusCode = 400
     constructor(message: string) {
         super(message)
+    }
+
+    public static drop(message: string) {
+        return new BadRequestError(message)
     }
 }

@@ -1,4 +1,4 @@
-import { BadRequestError } from '../../../../presentation/errors'
+import { BadRequestError } from '@shared/errors'
 import { CreateDto } from '../../domain/dtos/create-dto'
 import { Category } from '../../domain/entity'
 import { Repository } from '../../domain/repository'
@@ -8,7 +8,7 @@ export class Create {
 
     execute(data: { [key: string]: string }): Promise<Category> {
         const [error, createDto] = CreateDto.create(data)
-        if (error) throw new BadRequestError(error)
+        if (error) throw BadRequestError.drop(error)
         return this.repository.create(createDto!)
     }
 }
