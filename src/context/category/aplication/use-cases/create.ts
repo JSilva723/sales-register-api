@@ -9,6 +9,7 @@ export class Create {
     execute(data: { [key: string]: string }): Promise<Category> {
         const [error, createDto] = CreateDto.create(data)
         if (error) throw BadRequestError.drop(error)
+
         return this.repository.create(createDto!)
     }
 }
