@@ -1,12 +1,11 @@
-import { Update } from '@context/category/aplication/use-cases/update'
+import { Delete } from '@context/category/aplication/use-cases/delete'
 import { UpdateDto } from '@context/category/domain/dtos/update-dto'
-import { Category } from '@context/category/domain/entity'
 import { Repository } from '@context/category/domain/repository'
 import { BadRequestError } from '@shared/errors'
 
-describe('Use Case Update', () => {
+describe('Use Case Delete', () => {
     let mockRepository: jest.Mocked<Repository>
-    let updateUseCase: Update
+    let deleteUseCase: Delete
 
     beforeEach(() => {
         mockRepository = {
@@ -15,31 +14,28 @@ describe('Use Case Update', () => {
             update: jest.fn(),
             delete: jest.fn(),
         }
-        updateUseCase = new Update(mockRepository)
+        deleteUseCase = new Delete(mockRepository)
     })
 
     afterEach(() => {
         jest.clearAllMocks()
     })
 
-    test('Should update a category', async () => {
+    test('Should delete a category', async () => {
         const id = 1
-        const inputData = { name: 'Updated Category', other: 'Other property', id: 'id' }
-        const updatedCategory: Category = { id: 1, name: 'Updated Category', isActive: true }
-        mockRepository.update.mockResolvedValue(updatedCategory)
-        const result = await updateUseCase.execute(id, inputData)
-        expect(result).toEqual(updatedCategory)
+        mockRepository.delete.mockResolvedValue(undefined)
+        const result = await deleteUseCase.execute(id)
+        expect(result).toEqual(undefined)
     })
 
     test('Should throw BadRequestError for invalid ID', async () => {
         const id = 'invalid'
-        const inputData = { name: 'Updated Category' }
         const error = 'The ID must be number'
         const badRequest = { statusCode: 400, message: error, name: 'TestErrorBadRequest' }
         UpdateDto.update = jest.fn().mockReturnValue([error, undefined])
         BadRequestError.drop = jest.fn().mockReturnValue(badRequest)
         try {
-            updateUseCase.execute(+id, inputData)
+            deleteUseCase.execute(+id)
         } catch (e) {
             expect(e).toEqual(badRequest)
         }

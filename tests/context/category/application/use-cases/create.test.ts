@@ -4,7 +4,7 @@ import { Category } from '@context/category/domain/entity'
 import { Repository } from '@context/category/domain/repository'
 import { BadRequestError } from '@shared/errors'
 
-describe('Create', () => {
+describe('Use Case Create', () => {
     let mockRepository: jest.Mocked<Repository>
     let createUseCase: Create
 
@@ -22,7 +22,7 @@ describe('Create', () => {
         jest.clearAllMocks()
     })
 
-    test('should create a new category', async () => {
+    test('Should create a new category', async () => {
         const inputData = { name: 'Test Category' }
         const createdCategory: Category = { id: 1, name: 'Test Category' }
         mockRepository.create.mockResolvedValue(createdCategory)
@@ -30,7 +30,7 @@ describe('Create', () => {
         expect(result).toEqual(createdCategory)
     })
 
-    test('should create a new category', () => {
+    test('Should create a new category', () => {
         const inputData = { invalid: 'Invalid property' }
         const error = 'Invalid data'
         const badRequest = { statusCode: 400, message: error, name: 'TestErrorBadRequest' }
