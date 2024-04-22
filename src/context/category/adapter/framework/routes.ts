@@ -1,6 +1,6 @@
 import { Router, Request, Response, NextFunction } from 'express'
 import { Repository } from '../../aplication/repository'
-import { DataBasePrisma } from '../data-sourse/data-base-prisma'
+import { DataBasePrisma } from '../data-source/data-base-prisma'
 import { GetAll } from '../../aplication/use-cases/get-all'
 import { Create } from '../../aplication/use-cases/create'
 import { Update } from '../../aplication/use-cases/update'
