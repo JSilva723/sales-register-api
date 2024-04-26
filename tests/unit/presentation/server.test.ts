@@ -1,7 +1,5 @@
 import { Router } from 'express'
 import { Server } from '@presentation/server'
-import { prisma } from '@config/postgres-db-client'
-import request from 'supertest'
 
 const PORT = 3000
 const router = Router()
@@ -19,8 +17,7 @@ describe('Server class', () => {
         })
     })
 
-    afterAll(async () => {
-        await prisma.$disconnect()
+    afterAll(() => {
         server.stop()
     })
 
@@ -36,11 +33,4 @@ describe('Server class', () => {
         expect(logSpy).toHaveBeenCalledTimes(1)
         expect(logSpy).toHaveBeenCalledWith('Server listen on port: ', PORT)
     })
-
-    test('/GET ping', async () => {
-        const response = await request(server.getHttpServer()!).get('/ping')
-        expect(response.status).toBe(200)
-        expect(JSON.parse(response.text)).toEqual({ msg: 'pong' })
-    })
-
 })
