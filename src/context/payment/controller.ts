@@ -3,7 +3,6 @@ import { prisma } from '../../config/postgres-db-client'
 import { CreatePaymentDto } from './domain/dtos/create.dto'
 import { UpdatePaymentDto } from './domain/dtos/update.dto'
 
-
 export class PaymentController {
     constructor() { }
 
