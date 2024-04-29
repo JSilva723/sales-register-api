@@ -1,10 +1,6 @@
 import { prisma } from '@config/postgres-db-client'
 import { Router } from 'express'
 
-function parseDate(date: string) {
-    return date.replace(/T\d\d:\d\d:\d\d.\d\d\dZ/, 'T00:00:00.000Z')
-}
-
 interface CategoryItem {
     categoryId: number
     ammount: number
@@ -16,7 +12,7 @@ export class SaleRoutes {
 
         router.post('/', async (req, res, next) => {
             const sync: number[] = []
-            const date = parseDate(req.body.date)
+            const date = req.body.date
             const sales = req.body.sales
 
             try {

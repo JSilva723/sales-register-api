@@ -10,7 +10,7 @@ datasource db {
 model Category {
     id       Int     @id @default(autoincrement())
     name     String  @unique @db.VarChar(20)
-    isActive Boolean @default(true)
+    isActive Boolean @default(true) @map("is_active")
     items    Item[]
 
     @@map("categories")
@@ -19,14 +19,14 @@ model Category {
 model Payment {
     id       Int     @id @default(autoincrement())
     name     String  @unique @db.VarChar(20)
-    isActive Boolean @default(true)
+    isActive Boolean @default(true) @map("is_active")
     sales    Sale[]
 
     @@map("payments")
 }
 
 model Sale {
-    id        Int   @id @default(autoincrement())
+    id        Int      @id @default(autoincrement())
     paymentId Int      @map("payment_id")
     date      DateTime
     payment   Payment  @relation(fields: [paymentId], references: [id])
@@ -38,7 +38,7 @@ model Sale {
 model Item {
     id         Int      @id @default(autoincrement())
     ammount    Int
-    saleId     Int   @map("sale_id")
+    saleId     Int      @map("sale_id")
     sale       Sale     @relation(fields: [saleId], references: [id])
     categoryId Int      @map("category_id")
     category   Category @relation(fields: [categoryId], references: [id])

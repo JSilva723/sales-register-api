@@ -3,6 +3,11 @@ import { prisma } from './config/postgres-db-client'
 import { Server } from './presentation/server'
 import { AppRoutes } from './presentation/routes'
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+(BigInt.prototype as any).toJSON = function () {
+    return this.toString()
+}
+
 async function main() {
     const server = new Server({
         port: envs.PORT,
