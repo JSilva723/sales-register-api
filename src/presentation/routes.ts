@@ -13,7 +13,7 @@ export class AppRoutes {
         })
         router.use('/category', CategoryRoutes.routes)
         router.use('/payment', PaymentRoutes.routes)
-        router.use('/sale', SaleRoutes.routes)
+        router.use('/sales', SaleRoutes.routes)
         router.use('/report', ReportRoutes.routes)
         router.use(errorHandler)
 

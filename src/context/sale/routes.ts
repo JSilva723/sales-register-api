@@ -2,7 +2,7 @@ import { prisma } from '@config/postgres-db-client'
 import { Router } from 'express'
 
 interface CategoryItem {
-    categoryId: number
+    id: number
     ammount: number
 }
 
@@ -20,12 +20,12 @@ export class SaleRoutes {
                     for (const sale of sales) {
                         await prisma.sale.create({
                             data: {
-                                paymentId: sale.paymentId,
+                                paymentId: Number(sale.paymentId),
                                 date,
                                 items: {
-                                    create: sale.items.map((category: CategoryItem) => ({
-                                        categoryId: category.categoryId,
-                                        ammount: category.ammount
+                                    create: JSON.parse(sale.items).map((category: CategoryItem) => ({
+                                        categoryId: Number(category.id),
+                                        ammount: Number(category.ammount)
                                     }))
                                 }
                             },
